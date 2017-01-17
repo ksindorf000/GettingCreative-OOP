@@ -11,6 +11,7 @@ namespace GettingCreative_OOP
         static bool addPerson = true;
         static string name;
         static List<Person> people = new List<Person>();
+        static Person currentPerson;
 
         static void Main(string[] args)
         {
@@ -22,6 +23,16 @@ namespace GettingCreative_OOP
             Console.Clear();
             Console.WriteLine("Here is your list: \n");
             DisplayPeople();
+
+            Console.WriteLine("\n Who would you like to see info on? ");
+            string personName = Console.ReadLine();
+            currentPerson = people.Find(x => x.name == personName);
+
+            Console.Clear();
+            Console.WriteLine(currentPerson.name + "\n");
+            currentPerson.DisplayHobbies();
+            Console.WriteLine("\n" + currentPerson.age +
+                "\n" + currentPerson.ReturnDOB());
 
         }
 
@@ -37,7 +48,7 @@ namespace GettingCreative_OOP
 
             do
             {
-                Console.WriteLine("Please enter the name of an acquaintance: ");
+                Console.WriteLine("Please enter a name: ");
                 name = Console.ReadLine();
 
                 if (name.All(char.IsLetter))
