@@ -10,21 +10,27 @@ namespace GettingCreative_OOP
     {
         static bool addPerson = true;
         static string name;
+        static List<Person> people = new List<Person>();
 
         static void Main(string[] args)
         {
             while (addPerson)
             {
-                GetPersonList();
+                GetPeople();
             }
+
+            Console.Clear();
+            Console.WriteLine("Here is your list: \n");
+            DisplayPeople();
 
         }
 
         /********************************************************************
-         * GetPersonList()                                                  *
+         * GetPeople()                                                      *
          *   Method that gets people and adds them as an instance of Person *
+         *   and to a list of Person objects                                *
          ********************************************************************/
-        static void GetPersonList()
+        static void GetPeople()
         {
             string yN;
             bool valid = true;
@@ -47,6 +53,7 @@ namespace GettingCreative_OOP
             } while (!valid);
 
             Person person = new Person(name);
+            people.Add(person);
 
             do
             {
@@ -66,7 +73,19 @@ namespace GettingCreative_OOP
 
             } while (!valid);
 
-            addPerson = yN == "y" ? true : false;            
+            addPerson = yN == "y" ? true : false;
+        }
+
+        /********************************************************************
+         * DisplayPeople()                                                  *
+         *   Method that displays contents of people<>                      *
+         ********************************************************************/
+        static void DisplayPeople()
+        {
+            foreach (var person in people)
+            {
+                Console.Write(string.Join(", ", person) + "\n");
+            }
         }
 
     }
