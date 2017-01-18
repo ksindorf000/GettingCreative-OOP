@@ -8,7 +8,6 @@ namespace GettingCreative_OOP
 {
     class Questions
     {
-        private Dictionary<int, Questions> questions = new Dictionary<int, Questions>();
         private string text;
         private int value;
 
@@ -22,12 +21,14 @@ namespace GettingCreative_OOP
         }
 
         /********************************************************************
-         * DisplayQuestions()                                               *
-         *   Method that displays questions for the requested Person        *
+         * Constructor()                                                    *
          ********************************************************************/
-        private void DisplayQuestions()
+        public Questions(string _text, int _value)
         {
-            questions.Add()
+            text = _text;
+            value = _value;
         }
+
+
     }
 }

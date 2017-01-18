@@ -26,7 +26,7 @@ namespace GettingCreative_OOP
         private Random gen = new Random();
         public int age;
         private List<string> hobbies = new List<string>();
-
+        private Dictionary<int, Questions> questions = new Dictionary<int, Questions>();
 
 
         /********************************************************************
@@ -111,8 +111,23 @@ namespace GettingCreative_OOP
             Questions q4 = new Questions($"You like {currentPerson.hobbies[2]}?! Why?", -1);
             Questions q5 = new Questions($"Your name is {currentPerson.name}? Bet you gave your parents hell for that one!", -2);
 
+            questions.Add(1, q1);
+            questions.Add(2, q2);
+            questions.Add(3, q3);
+            questions.Add(4, q4);
+            questions.Add(5, q5);
+        }
 
-
+        /********************************************************************
+         * DisplayQuestions()                                               *
+         *   Method that displays questions for the current person          *
+         ********************************************************************/
+        private void DisplayQuestions()
+        {
+            for (int i = 0; i < questions.Count; i++)
+            {
+                Console.WriteLine(questions);
+            }
         }
 
 
