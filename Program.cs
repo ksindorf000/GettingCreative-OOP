@@ -137,6 +137,22 @@ namespace GettingCreative_OOP
                 currentPerson.ReturnDOB());
         }
 
+        /********************************************************************
+         * GetInteraction()                                                 *
+         *   Method that displays details for the requested Person          *
+         ********************************************************************/
+        private static void GetInteraction()
+        {
+            Console.Clear();
+            Console.WriteLine(currentPerson.name + "\n");
+
+            currentPerson.DisplayHobbies();
+
+            Console.WriteLine("\n" +
+                currentPerson.age + "\n" +
+                currentPerson.ReturnDOB());
+        }
+
 
 
     }

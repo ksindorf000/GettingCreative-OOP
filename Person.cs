@@ -99,6 +99,21 @@ namespace GettingCreative_OOP
             return birthday.ToShortDateString();
         }
 
+        /********************************************************************
+         * CreateQuestions()                                                *
+         *   Method that creates customized questions for the current person*
+         ********************************************************************/
+        private void CreateQuestions(Person currentPerson)
+        {
+            Questions q1 = new Questions("How about this weather?", 0);
+            Questions q2 = new Questions($"So what do you like about {currentPerson.hobbies[0]}?", 1);
+            Questions q3 = new Questions($"Would you like to hang out and talk about {currentPerson.hobbies[1]} later?", 2);
+            Questions q4 = new Questions($"You like {currentPerson.hobbies[2]}?! Why?", -1);
+            Questions q5 = new Questions($"Your name is {currentPerson.name}? Bet you gave your parents hell for that one!", -2);
+
+
+
+        }
 
 
     }
