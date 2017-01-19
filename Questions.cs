@@ -20,15 +20,6 @@ namespace GettingCreative_OOP
             value = _value;
         }
 
-        /********************************************************************
-         * Constructor()                                                    *
-         ********************************************************************/
-        public Questions(string _text, int _value)
-        {
-            text = _text;
-            value = _value;
-        }
-
 
     }
 }
