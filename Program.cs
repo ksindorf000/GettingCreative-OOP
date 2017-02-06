@@ -12,19 +12,49 @@ namespace GettingCreative_OOP
         static string name;
         static List<Person> people = new List<Person>();
         static Person currentPerson;
+        static int qId;
+        static bool socialize = true;
 
+        /********************************************************************
+         * Main()                                                           *
+         ********************************************************************/
         static void Main(string[] args)
         {
+
             while (addPerson)
             {
                 GetPeople();
             }
 
-            Console.Clear();
-            DisplayPeople();
-            GetCurrentPerson();
-            DisplayDetails();
+            while (socialize)
+            {
+                Console.Clear();
+                DisplayPeople();
 
+                GetCurrentPerson();
+                Console.Clear();
+
+                DisplayDetails();
+                ProcessInteraction();
+
+                socialize = ShallWeCOntinue();                
+            }
+
+            Console.Clear();
+            DisplayFinals();
+        }
+
+        /********************************************************************
+         * ShallWeContinue()                                                *
+         *   Method that asks the user whether or not they would like to    *
+         *   continue socializing                                           *
+         ********************************************************************/
+        private static bool ShallWeCOntinue()
+        {
+            Console.WriteLine("Would you like to continue socializing? (Y/N)");
+            string yN = Console.ReadLine().ToLower();
+            socialize = yN == "y" ? true : false;
+            return socialize;
         }
 
         /********************************************************************
@@ -40,7 +70,7 @@ namespace GettingCreative_OOP
             do
             {
                 Console.WriteLine("Please enter a name: ");
-                name = Console.ReadLine();
+                name = Console.ReadLine().ToUpper();
 
                 if (name.All(char.IsLetter))
                 {
@@ -96,15 +126,15 @@ namespace GettingCreative_OOP
         * GetCurrentPerson()                                               *
         *   Method that gets and validates current Person based on name    *
         ********************************************************************/
-        private static void GetCurrentPerson()
+        static void GetCurrentPerson()
         {
             bool valid = true;
             string personName;
 
             do
             {
-                Console.WriteLine("\n Who would you like to see info on? ");
-                personName = Console.ReadLine();
+                Console.WriteLine("\n Who would you like to interact with? ");
+                personName = Console.ReadLine().ToUpper();
 
                 if (name.All(char.IsLetter))
                 {
@@ -125,7 +155,7 @@ namespace GettingCreative_OOP
          * DisplayDetails()                                                 *
          *   Method that displays details for the requested Person          *
          ********************************************************************/
-        private static void DisplayDetails()
+        static void DisplayDetails()
         {
             Console.Clear();
             Console.WriteLine(currentPerson.name + "\n");
@@ -138,22 +168,45 @@ namespace GettingCreative_OOP
         }
 
         /********************************************************************
-         * GetInteraction()                                                 *
-         *   Method that displays details for the requested Person          *
+         * ProcessInteraction()                                             *
+         *   Method that generates questions for the selected person,       *
+         *   displays available questions for selection, calculates and     *
+         *   displays friend points for selected person                     *
          ********************************************************************/
-        private static void GetInteraction()
+        static void ProcessInteraction()
         {
+            Console.WriteLine("\n");
+            Questions.CreateQuestions(currentPerson);
+            Questions.DisplayQuestions();
+            bool valid = false;
+
+            while (!valid)
+            {
+                Console.WriteLine($"What question would you like to ask {currentPerson} (#): ");
+                valid = int.TryParse(Console.ReadLine(), out qId);
+            }
+
+            string question = Questions.DisplaySingleQuestion(qId);
+            int friendPts = Questions.GetFriendPtValue(qId);
+            int totalPts = currentPerson.FriendPointCalc(friendPts);
+
             Console.Clear();
-            Console.WriteLine(currentPerson.name + "\n");
-
-            currentPerson.DisplayHobbies();
-
-            Console.WriteLine("\n" +
-                currentPerson.age + "\n" +
-                currentPerson.ReturnDOB());
+            Console.WriteLine($"You asked {currentPerson} \"{question}\" and gained {friendPts} friend points. ");
+            Console.WriteLine($"You have accrued {totalPts} friend points through interaction with {currentPerson}!");
         }
 
+        /********************************************************************
+         * DisplayFinals()                                                  *
+         *   Method that displays all People and their final friend points  *
+         ********************************************************************/
+        static void DisplayFinals()
+        {
+            foreach (var person in people.ToList())
+            {
+                Console.WriteLine($"{person.name}: {person.friendPts}");
+            }
 
+        }
 
     }
 }

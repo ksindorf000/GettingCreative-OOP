@@ -20,14 +20,12 @@ namespace GettingCreative_OOP
     {
 
         public string name;
-        private int friendPts;
+        public int friendPts;
         private DateTime birthday;
         public DateTime today = DateTime.Today;
         private Random gen = new Random();
         public int age;
-        private List<string> hobbies = new List<string>();
-        private Dictionary<int, Questions> questions = new Dictionary<int, Questions>();
-
+        internal List<string> hobbies = new List<string>();
 
         /********************************************************************
          * Constructor                                                      *
@@ -100,36 +98,15 @@ namespace GettingCreative_OOP
         }
 
         /********************************************************************
-         * CreateQuestions()                                                *
-         *   Method that creates customized questions for the current person*
+         * FriendPointCalc()                                          *
+         *   Method that adds points from given question to given person's   *
+         *   total points                                                    *
          ********************************************************************/
-        private void CreateQuestions(Person currentPerson)
+        public int FriendPointCalc(int addPts)
         {
-            Questions q1 = new Questions("How about this weather?", 0);
-            Questions q2 = new Questions($"So what do you like about {currentPerson.hobbies[0]}?", 1);
-            Questions q3 = new Questions($"Would you like to hang out and talk about {currentPerson.hobbies[1]} later?", 2);
-            Questions q4 = new Questions($"You like {currentPerson.hobbies[2]}?! Why?", -1);
-            Questions q5 = new Questions($"Your name is {currentPerson.name}? Bet you gave your parents hell for that one!", -2);
-
-            questions.Add(1, q1);
-            questions.Add(2, q2);
-            questions.Add(3, q3);
-            questions.Add(4, q4);
-            questions.Add(5, q5);
+            friendPts += addPts;
+            return friendPts;
         }
-
-        /********************************************************************
-         * DisplayQuestions()                                               *
-         *   Method that displays questions for the current person          *
-         ********************************************************************/
-        private void DisplayQuestions()
-        {
-            for (int i = 0; i < questions.Count; i++)
-            {
-                Console.WriteLine(questions);
-            }
-        }
-
 
     }
 
